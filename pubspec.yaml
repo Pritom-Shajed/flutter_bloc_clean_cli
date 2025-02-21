@@ -1,0 +1,18 @@
+name: flutter_bloc_clean_cli
+description: "A CLI tool to generate Bloc-based clean architecture structure in a Flutter project."
+version: 1.0.0
+repository: https://github.com/pritom-shajed/flutter_bloc_clean_cli
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  args: ^2.6.0
+
+executables:
+  bloc_clean: flutter_bloc_clean_cli
+
+dev_dependencies:
+  lints: ^5.0.0
+
+example: example/
