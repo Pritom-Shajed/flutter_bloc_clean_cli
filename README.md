@@ -14,7 +14,7 @@ A simple Dart CLI tool to generate a Bloc Clean Architecture structure in a Flut
 To install the CLI globally, run:
 
 ```sh
-dart pub global activate bloc_clean
+dart pub global activate flutter_bloc_clean_cli
 ```
 
 ## ⚡ Usage
