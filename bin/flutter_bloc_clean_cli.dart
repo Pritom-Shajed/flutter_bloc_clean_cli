@@ -14,7 +14,12 @@ void main(List<String> arguments) {
   final parser =
       ArgParser()
         ..addOption('feature', abbr: 'f', help: 'Feature name in snake_case')
-        ..addFlag('write', abbr: 'w', defaultsTo: true, help: 'Write basic structure in each file');
+        ..addFlag(
+          'write',
+          abbr: 'w',
+          defaultsTo: true,
+          help: 'Write basic structure in each file',
+        );
 
   final argResults = parser.parse(arguments);
   final String? featureName = argResults['feature'];
@@ -31,7 +36,11 @@ void main(List<String> arguments) {
   }
 
   // Convert feature_name to PascalCase
-  final String pascalCase = featureName.split('_').map((word) => word[0].toUpperCase() + word.substring(1)).join();
+  final String pascalCase =
+      featureName
+          .split('_')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join();
 
   final String baseDir = 'lib/src/features/$featureName';
   final List<String> directories = [
@@ -61,7 +70,8 @@ void main(List<String> arguments) {
         "import '../../domain/repositories/$featureName.dart';\nimport '../../data/sources/local/$featureName.dart';\nimport '../../data/sources/remote/$featureName.dart';\n\nclass ${pascalCase}RepositoryImpl implements ${pascalCase}Repository {\n  final ${pascalCase}LocalService _localService;\n  final ${pascalCase}RemoteService _remoteService;\n\n  ${pascalCase}RepositoryImpl(this._localService, this._remoteService);\n}",
     '$baseDir/domain/entities/$featureName.dart':
         "import '../../data/models/$featureName.dart';\n\nclass ${pascalCase}Entity {\n  ${pascalCase}Entity();\n\n  ${pascalCase}Model get toModel => ${pascalCase}Model();\n}",
-    '$baseDir/domain/repositories/$featureName.dart': "abstract class ${pascalCase}Repository {}",
+    '$baseDir/domain/repositories/$featureName.dart':
+        "abstract class ${pascalCase}Repository {}",
     '$baseDir/domain/use_cases/$featureName.dart':
         "import '../repositories/$featureName.dart';\n\nclass ${pascalCase}UseCase {\n  final ${pascalCase}Repository _repository;\n\n  ${pascalCase}UseCase(this._repository);\n}",
     '$baseDir/presentation/bloc/${featureName}_bloc.dart':
